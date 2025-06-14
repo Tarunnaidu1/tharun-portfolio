@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tharun Ravuri - Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Artistic Animated Background -->
+    <div class="animated-background">
+      <div class="wallpaper-pattern"></div>
+      <!-- Artistic Wave 1 -->
+      <svg
+        class="art-wave-1"
+        viewBox="0 0 1440 320"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill="#3498db"
+          fill-opacity="0.12"
+          d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,149.3C840,139,960,149,1080,165.3C1200,181,1320,203,1380,213.3L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+        ></path>
+      </svg>
+      <!-- Artistic Wave 2 -->
+      <svg
+        class="art-wave-2"
+        viewBox="0 0 1440 320"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill="#2980b9"
+          fill-opacity="0.08"
+          d="M0,224L60,213.3C120,203,240,181,360,181.3C480,181,600,203,720,213.3C840,224,960,224,1080,208C1200,192,1320,160,1380,144L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+        ></path>
+      </svg>
+      <!-- Floating Circle -->
+      <div class="floating-circle"></div>
+      <!-- Floating Square -->
+      <div class="floating-square"></div>
+      <div class="gradient-overlay"></div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification" style="display: none">
+      <div class="notification-content">
+        <span id="notification-message"></span>
+      </div>
+    </div>
+
+    {% extends "base.html" %} {% block content %}
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <div class="nav-brand">
+            <div class="nav-image">
+              <img
+                src="{{ url_for('static', filename='images/2.jpeg') }}"
+                alt="Nav Logo"
+                class="nav-logo-img"
+              />
+            </div>
+            <div class="nav-logo">RTVVP</div>
+          </div>
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>RAVURI TARUN VAMSI VARA PRASAD</h1>
+            <div class="typewriter-container">
+              <span id="typewriter-text"></span>
+            </div>
+            <p class="lead">
+              I'm a passionate data analyst with a keen eye for patterns and a
+              drive to transform raw data into actionable insights.
+            </p>
+            <p>
+              I create beautiful and functional websites with modern
+              technologies
+            </p>
+            <div class="home-social-links">
+              <a
+                href="https://www.linkedin.com/in/ravuri-tarun-vamsi-vara-prasad-35bb19286"
+                target="_blank"
+                class="home-social-link"
+              >
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a
+                href="https://www.instagram.com/tharun_naidu_ravuri_"
+                target="_blank"
+                class="home-social-link"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://github.com/TharunRavuri"
+                target="_blank"
+                class="home-social-link"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+            <div class="cta-buttons">
+              <a href="#contact" class="btn btn-primary">Get in Touch</a>
+              <a href="#projects" class="btn btn-secondary">View My Work</a>
+            </div>
+          </div>
+          <div class="profile right-aligned">
+            <div class="profile-image-container animated-curve">
+              <div class="curve-border"></div>
+              <img
+                src="{{ url_for('static', filename='images/1.jpg') }}"
+                alt="Profile Picture"
+                class="profile-image"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="About">
+        <h1 class="title">About Me</h1>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              I am a passionate data analyst with a strong foundation in
+              statistical analysis and data visualization...
+            </p>
+            <p>
+              With expertise in Python, SQL, Tableau, I specialize in creating
+              data-driven solutions...
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <i class="fab fa-python fa-4x skill-icon"></i>
+            <h3>Python</h3>
+            <p>Data Analysis, Automation, Scripting</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-database fa-4x skill-icon"></i>
+            <h3>SQL</h3>
+            <p>Database Management, Query Optimization</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-chart-bar fa-4x skill-icon"></i>
+            <h3>Data Visualization</h3>
+            <p>Tableau, Power BI, Matplotlib</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-file-excel fa-4x skill-icon"></i>
+            <h3>Excel</h3>
+            <p>Advanced Formulas, Pivot Tables, Data Analysis</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-chart-line fa-4x skill-icon"></i>
+            <h3>Data Analysis</h3>
+            <p>Statistical Analysis, Data Cleaning, Insights Generation</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-server fa-4x skill-icon"></i>
+            <h3>Flask</h3>
+            <p>Web Development, API Development, Backend Services</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <div class="projects">
+        <h1 class="title">My Projects</h1>
+        <div class="project-container">
+          <div class="project-details">
+            <div class="project">
+              <h1>Autonomous Navigation and Logistics System</h1>
+              <p>
+                Led the team as Project Leader to design an intelligent
+                logistics and navigation system...
+              </p>
+              <div class="about-project">
+                <button class="link-btn">View Project</button>
+                <button class="https://github.com/Tarunnaidu1">GitHub</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="contact-container">
+        <h2 class="contact-heading">Contact Me</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="info-item">
+              <i class="fas fa-phone"></i>
+              <div>
+                <h4>Phone</h4>
+                <p>+91 9121416471</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <h4>Email</h4>
+                <p>tarunravuri0@gmail.com</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fab fa-instagram"></i>
+              <div>
+                <h4>Instagram</h4>
+                <a
+                  href="https://www.instagram.com/tharun_naidu_ravuri_"
+                  target="_blank"
+                  >@tharun_naidu_ravuri_</a
+                >
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fab fa-linkedin"></i>
+              <div>
+                <h4>LinkedIn</h4>
+                <a
+                  href="https://www.linkedin.com/in/ravuri-tarun-vamsi-vara-prasad-05499922b"
+                  target="_blank"
+                  >Ravuri Tarun Vamsi Vara Prasad</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <form id="contact-form" action="/send_message" method="post">
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Your Name" required />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    {% endblock %} {% block scripts %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("contact-form");
+        const notification = document.getElementById("notification");
+        const message = document.getElementById("notification-message");
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+
+          // Show loading state
+          message.textContent = "Sending message...";
+          notification.className = "notification";
+          notification.style.display = "block";
+
+          fetch("/send_message", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                message.textContent = "Message sent successfully!";
+                notification.className = "notification success";
+                form.reset();
+              } else {
+                message.textContent =
+                  data.error || "Failed to send message. Please try again.";
+                notification.className = "notification error";
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              message.textContent = "An error occurred. Please try again.";
+              notification.className = "notification error";
+            })
+            .finally(() => {
+              // Hide notification after 5 seconds
+              setTimeout(() => {
+                notification.style.display = "none";
+              }, 5000);
+            });
+        });
+      });
+    </script>
+    {% endblock %}
+  </body>
+</html>

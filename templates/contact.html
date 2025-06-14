@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Me</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body class="contact-gradient-bg">
+    <section class="contact-section">
+      <div class="contact-container">
+        <!-- Left Side Contact Details -->
+        <div class="contact-details">
+          <h2 class="contact-heading">Get in Touch</h2>
+          <div class="contact-info">
+            <div class="info-item">
+              <i class="fas fa-phone"></i>
+              <p>+91 9121416471</p>
+            </div>
+
+            <div class="info-item">
+              <i class="fas fa-envelope"></i>
+              <p>tarunravuri0@gmail.com</p>
+            </div>
+
+            <div class="info-item">
+              <i class="fab fa-linkedin"></i>
+              <a href="https://linkedin.com/in/yourusername" target="_blank"
+                >Connect with me</a
+              >
+            </div>
+
+            <div class="info-item">
+              <i class="fab fa-instagram"></i>
+              <a href="https://instagram.com/yourusername" target="_blank"
+                >Follow me</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side Contact Form -->
+        <div class="contact-form-container">
+          <h2 class="contact-heading">Send Message</h2>
+          <form
+            class="contact-form"
+            id="contactForm"
+            method="POST"
+            action="/send_message"
+          >
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your Name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Your Email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="message">Message:</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Your Message"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn" id="submitBtn">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notification div -->
+    <div id="notification" class="notification">
+      <div class="notification-content">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-message"></span>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("contactForm");
+        const notification = document.getElementById("notification");
+        const message = document.getElementById("notification-message");
+        const submitButton = document.getElementById("submitBtn");
+
+        function showNotification(text, isError = false) {
+          // Update notification content
+          message.textContent = text;
+          notification.className = "notification";
+
+          // Update icon based on success/error
+          const icon = notification.querySelector("i");
+          if (isError) {
+            icon.className = "fas fa-exclamation-circle";
+            notification.classList.add("error");
+          } else {
+            icon.className = "fas fa-check-circle";
+          }
+
+          // Show notification
+          setTimeout(() => {
+            notification.classList.add("show");
+          }, 100);
+
+          // Hide notification after 3 seconds
+          setTimeout(() => {
+            notification.classList.add("hide");
+            setTimeout(() => {
+              notification.classList.remove("show", "hide", "error");
+            }, 300);
+          }, 3000);
+        }
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          console.log("Form submitted");
+
+          // Validate form
+          const name = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const messageText = document.getElementById("message").value.trim();
+
+          console.log("Form values:", { name, email, message: messageText });
+
+          if (!name || !email || !messageText) {
+            showNotification("Please fill in all fields", true);
+            return;
+          }
+
+          // Disable submit button and show loading state
+          submitButton.disabled = true;
+          submitButton.textContent = "Sending...";
+
+          try {
+            const formData = new FormData();
+            formData.append("name", name);
+            formData.append("email", email);
+            formData.append("message", messageText);
+
+            console.log("Sending form data:", {
+              name: formData.get("name"),
+              email: formData.get("email"),
+              message: formData.get("message"),
+            });
+
+            const response = await fetch("/send_message", {
+              method: "POST",
+              body: formData,
+            });
+
+            console.log("Response status:", response.status);
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("Response data:", data);
+
+            if (data.success) {
+              showNotification("Message sent successfully!");
+              form.reset();
+            } else {
+              showNotification(
+                data.error || "Failed to send message. Please try again.",
+                true
+              );
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            showNotification("An error occurred. Please try again.", true);
+          } finally {
+            // Reset button state
+            submitButton.disabled = false;
+            submitButton.textContent = "Send Message";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

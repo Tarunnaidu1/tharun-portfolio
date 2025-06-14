@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}RAVURI TARUN VAMSI VARA PRASAD - Portfolio{% endblock %}
+    </title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <div class="flash-message {{ category }}" id="flash-{{ loop.index }}">
+      {{ message }}
+      <button
+        class="close-flash"
+        onclick="closeFlash('flash-{{ loop.index }}')"
+      >
+        &times;
+      </button>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
+
+    <main class="container">{% block content %}{% endblock %}</main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2024 RAVURI TARUN VAMSI VARA PRASAD. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Typewriter effect
+      const typewriterText = document.getElementById("typewriter-text");
+      const phrases = [
+        "I am a Data Analyst",
+        "I am a Python Developer",
+        "I am a Fresher",
+      ];
+
+      let currentPhraseIndex = 0;
+      let currentLetterIndex = 0;
+      let isDeleting = false;
+
+      function type() {
+        const currentPhrase = phrases[currentPhraseIndex];
+        const currentText = currentPhrase.slice(0, currentLetterIndex);
+        typewriterText.textContent = currentText;
+
+        if (!isDeleting) {
+          if (currentLetterIndex < currentPhrase.length) {
+            currentLetterIndex++;
+            setTimeout(type, 100);
+          } else {
+            isDeleting = true;
+            setTimeout(type, 1000);
+          }
+        } else {
+          if (currentLetterIndex > 0) {
+            currentLetterIndex--;
+            setTimeout(type, 50);
+          } else {
+            isDeleting = false;
+            currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+            setTimeout(type, 500);
+          }
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", type);
+
+      // Close flash messages
+      function closeFlash(id) {
+        const flash = document.getElementById(id);
+        if (flash) {
+          flash.style.opacity = "0";
+          setTimeout(() => {
+            flash.remove();
+          }, 500);
+        }
+      }
+
+      // Auto-close flash messages after 5 seconds
+      document.addEventListener("DOMContentLoaded", function () {
+        const flashMessages = document.querySelectorAll(".flash-message");
+        flashMessages.forEach((flash) => {
+          setTimeout(() => {
+            closeFlash(flash.id);
+          }, 5000);
+        });
+      });
+    </script>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
